@@ -1,0 +1,4 @@
+def test_health_endpoint_is_public(client, db):
+    response = client.get("/api/health/")
+    assert response.status_code == 200
+    assert response.data == {"status": "ok"}
