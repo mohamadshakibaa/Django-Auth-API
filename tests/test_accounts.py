@@ -11,8 +11,8 @@ def test_register_rejects_weak_password(client, db):
         REGISTER_URL,
         {
             "email": "weak@example.com",
-            "password": "m@123456",
-            "password2": "m@123456",
+            "password": "123456789",
+            "password2": "123456789",
         },
         format="json",
     )

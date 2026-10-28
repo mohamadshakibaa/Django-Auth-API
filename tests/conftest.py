@@ -1,5 +1,3 @@
-from decimal import Decimal
-
 import pytest
 from django.contrib.auth import get_user_model
 from rest_framework.test import APIClient
@@ -15,16 +13,27 @@ def client():
 
 @pytest.fixture
 def user(db):
-    return User.objects.create_user(username="john", email="john@example.com", password=PASSWORD)
+    return User.objects.create_user(
+        email="john@example.com",
+        password=PASSWORD,
+        first_name="John",
+    )
 
 
 @pytest.fixture
 def other_user(db):
-    return User.objects.create_user(username="jane", email="jane@example.com", password=PASSWORD)
+    return User.objects.create_user(
+        email="jane@example.com",
+        password=PASSWORD,
+        first_name="Jane",
+    )
 
 
 @pytest.fixture
 def staff_user(db):
     return User.objects.create_user(
-        username="admin", email="admin@example.com", password=PASSWORD, is_staff=True
+        email="admin@example.com",
+        password=PASSWORD,
+        is_staff=True,
+        first_name="Admin",
     )

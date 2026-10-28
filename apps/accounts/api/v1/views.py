@@ -58,7 +58,7 @@ class LogoutView(APIView):
                 raise TokenError("Token does not belong to the authenticated user.")
             token.blacklist()
         except TokenError:
-            raise ValidationError({"refresh": "Invalid or expired token."})
+            raise ValidationError({"refresh": "Invalid or expired token."}) from None
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 

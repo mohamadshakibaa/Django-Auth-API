@@ -34,7 +34,7 @@ class RegisterationSerializer(serializers.Serializer):
         try:
             validate_password(attrs["password"], user=candidate)
         except DjangoValidationError as exc:
-            raise serializers.ValidationError({"password": exc.messages})
+            raise serializers.ValidationError({"password": list(exc.messages)}) from exc
         return attrs
 
     def create(self, validated_data):
@@ -62,7 +62,7 @@ class ChangePasswordSerializer(serializers.Serializer):
         try:
             validate_password(value, user=user)
         except DjangoValidationError as exc:
-            raise serializers.ValidationError(exc.messages)
+            raise serializers.ValidationError(exc.messages) from exc
 
         return value
 
